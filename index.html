@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hey you....</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #E5F2FF 0%, #F0F8FF 50%, #E5EEFF 100%);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 1rem 2rem;
+}
+
+header h1 {
+    color: #2D3047;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+nav {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #A8D5FF;
+    position: sticky;
+    top: 60px;
+    z-index: 20;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0 2rem;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border: none;
+    background: none;
+    color: #2D3047;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 4px solid transparent;
+    transition: all 0.3s;
+    white-space: nowrap;
+    opacity: 0.6;
+}
+
+.tab:hover {
+    opacity: 1;
+    background: rgba(168, 213, 255, 0.1);
+}
+
+.tab.active {
+    opacity: 1;
+    border-bottom-color: #7AB8FF;
+}
+
+main {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.masonry {
+    column-count: 4;
+    column-gap: 20px;
+}
+
+@media (max-width: 1200px) { .masonry { column-count: 3; } }
+@media (max-width: 768px) { .masonry { column-count: 2; } }
+@media (max-width: 480px) { .masonry { column-count: 1; } }
+
+.card {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transform: scale(1.02);
+}
+
+.card img,
+.card video {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none;
+}
+
+.card-content {
+    padding: 1.25rem;
+}
+
+.card-title {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #2D3047;
+    margin-bottom: 0.5rem;
+}
+
+.card-description {
+    color: #2D3047;
+    font-size: 0.875rem;
+    opacity: 0.7;
+}
+
+.letter-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border: 3px solid #A8D5FF;
+}
+
+.letter-card h1,
+.letter-card h2,
+.letter-card h3 {
+    color: #2D3047;
+    margin-bottom: 1.5rem;
+}
+
+.letter-card h1 {
+    font-size: 3rem;
+}
+
+.letter-card p {
+    font-size: 1.25rem;
+    color: #2D3047;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.letter-card ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1.5rem;
+}
+
+.letter-card li {
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.letter-card li:before {
+    content: "💖";
+    position: absolute;
+    left: 0;
+}
+
+.letter-card .highlight,
+.letter-card strong {
+    color: #5BA3E0;
+    font-weight: 600;
+}
+
+.letter-card .emoji {
+    font-size: 1.2em;
+}
+
+.letter-card .sign-off {
+    margin-top: 2rem;
+    font-style: italic;
+}
+
+.heart-icon {
+    text-align: right;
+    margin-top: 1.5rem;
+    font-size: 2rem;
+    color: #7AB8FF;
+}
+
+.thankyou-card {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 4rem;
+    border-radius: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    border: 3px solid #A8D5FF;
+}
+
+.thankyou-card .star {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.thankyou-card h2 {
+    font-size: 3.5rem;
+    color: #2D3047;
+    margin-bottom: 1.5rem;
+}
+
+.thankyou-card p {
+    font-size: 1.25rem;
+    color: #2D3047;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.milestone-card {
+    display: flex;
+    align-items: start;
+    gap: 0.75rem;
+    padding: 1.5rem;
+}
+
+.milestone-icon {
+    color: #7AB8FF;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.milestone-card p {
+    color: #2D3047;
+}
+
+.quote-card {
+    background: linear-gradient(135deg, #E5F2FF, #F0F8FF);
+    padding: 1.5rem;
+}
+
+.quote-text {
+    font-style: italic;
+    color: #2D3047;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.quote-author {
+    color: #2D3047;
+    font-size: 0.875rem;
+    opacity: 0.7;
+}
+
+.verse-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border: 2px solid #C8B6E2;
+}
+
+.verse-text {
+    color: #2D3047;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.verse-reference {
+    color: #2D3047;
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.video-card {
+    position: relative;
+}
+
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.play-button {
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.play-icon {
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-left: 25px solid #7AB8FF;
+    border-bottom: 15px solid transparent;
+    margin-left: 5px;
+}
+
+.viewer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(245, 250, 255, 0.97);
+    backdrop-filter: blur(10px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.viewer.active {
+    display: flex;
+}
+
+.viewer-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 50px;
+    color: #2D3047;
+    cursor: pointer;
+    z-index: 10;
+    user-select: none;
+}
+
+.viewer-close:hover {
+    opacity: 0.7;
+}
+
+.viewer-content {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.viewer-content img,
+.viewer-content video {
+    max-width: 100%;
+    max-height: 90vh;
+    display: block;
+}
+
+.viewer-left,
+.viewer-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.viewer-left { left: 0; }
+.viewer-right { right: 0; }
+
+.section-header {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2D3047;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.section-container {
+    margin-bottom: 3rem;
+}
+
+@media (max-width: 768px) {
+    header h1 { font-size: 1.25rem; }
+    .letter-card h1 { font-size: 2rem; }
+    .letter-card p { font-size: 1rem; }
+    .thankyou-card h2 { font-size: 2.5rem; }
+    .thankyou-card p { font-size: 1rem; }
+    .section-header { font-size: 1.5rem; }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>Hey you....</h1>
+</header>
+
+<nav>
+    <div class="tabs">
+        <button class="tab active" data-tab="tab1">
+            <span>❤️</span>
+            <span>My letter to you</span>
+        </button>
+        <button class="tab" data-tab="tab2">
+            <span>✨</span>
+            <span>How Far You've Come</span>
+        </button>
+        <button class="tab" data-tab="tab3">
+            <span>📖</span>
+            <span>Quotes & Verses</span>
+        </button>
+        <button class="tab" data-tab="tab4">
+            <span>📷</span>
+            <span>Memories</span>
+        </button>
+        <button class="tab" data-tab="tab5">
+            <span>⭐</span>
+            <span>Thank You</span>
+        </button>
+    </div>
+</nav>
+
+<main>
+    <div class="tab-content active" id="tab1">
+        <div class="letter-card">
+            <h1>Dear Tillie</h1>
+            <p>Yoh Sana, where do I even begin....</p>
+        
+            <p>I have told this story many times but ohh well one more time won't hurt. Should I start from the day I met Miss Molefe in COS 151 this girl challenged me from the first day but, I remember thinking she's actually nice😂, and everytime I saw her she would have the biggest smile and say "Hie Milani" that's my fault btw my bad 😂. Then one day this girl who's always happy was not smiling at all. I could tell she wasn't okay so I mentioned my daily plans in passing hoping she would engage in them and it would make her day better.</p>
+			<p>I had never met a person who ceizes to function properly without them doing what they love the most. I was so used to supressing who I am I had lost touch to most of my emotions as a person as well as what I loved. All I knew in that moment was pain and I knew the last thing I wanted was to see a person hurting. Little did I know this small gesture would lead to my healing and self discovery slowly but surely and as the year progressed this became clear.</p>
+            <p>Looking back at everything, from those first greetings to where we are now I can see how you've been part of the good things in my life this year. When I think about the person you are certain things stand out, that need to be said.</p>
+            
+            <h3>The Rati I Know:</h3>
+            <ul>
+                <li><strong>Caring person</strong> - like genuinely, your heart is full of joy, love and kindness</li>
+                <li><strong>Balanced life queen</strong> - dancer (You have a whole Capitec ad!), gym, academics, preaches from time to time... How do you do it???</li>
+                <li><strong>That girl who will want something and get it</strong> - your determination inspires me</li>
+                <li><strong>Study sessions</strong> - from confused to conquerors together</li>
+                <li><strong>Talks that never end</strong> - saying bye many times and we still continue talking 😂</li>
+                <li><strong>Motivates me when I'm low</strong> - always there with the right words</li>
+            </ul>
+            
+            <p>I know this year asked you to face losses in areas you never expected, but watching you feel the pain, learn the lessons, and still choose to rise with so much grace? That showed me what real strength looks like. You haven't lost yourself in the process you've grown into someone even more incredible, someone who now knows her worth beyond any situation.</p>
+            
+            <p>Thank you for making first year a blast. Thank you for every conversation, every laugh, and for being the kind of friend everyone hopes to find.</p>
+            <p>This isn't just a collection of memories <span class="emoji">😭</span>, it's a reminder that we made it, Tillie</p>
+            <p>Here's to many more years of annoying each other and calling it friendship 😂❤️‼️</p>
+            
+            <div class="sign-off">
+                <p>With love and gratitude,</p>
+                <p style="margin-top: 10px; font-weight: bold;">Milani😂</p>
+            </div>
+        </div>
+    </div>
+
+<div class="tab-content" id="tab2">
+    <h2 class="section-header">Panji's Growth Journey This Year</h2>
+    <div class="masonry">
+        <div class="card">
+            <div class="milestone-card">
+                <div class="milestone-icon">🏐</div>
+                <p>Found your team spirit in <strong>Netball</strong> and shone on the court!</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="milestone-card">
+                <div class="milestone-icon">🎵</div>
+                <p>Found your voice in <strong>Acapella</strong> and created beautiful harmony!</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="milestone-card">
+                <div class="milestone-icon">🎉</div>
+                <p>Hosted your <strong>birthday</strong> with so much joy and love!</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="milestone-card">
+                <div class="milestone-icon">🗺️</div>
+                <p><strong>Explored more</strong> of life with brave curiosity!</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="milestone-card">
+                <div class="milestone-icon">🙏</div>
+                <p><strong>Built your faith</strong> so deeply you're considering ministering, thats inspiring!</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="milestone-card">
+                <div class="milestone-icon">💁🏾‍♀️</div>
+                <p>Your amazing <strong>hair growth journey</strong> brooo, that crown is thriving! 👑</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="milestone-card">
+                <div class="milestone-icon">🏃🏾‍♀️</div>
+                <p>Crushed those <strong>5km runs</strong> like the strong queen you are!</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="milestone-card">
+                <div class="milestone-icon">🏡</div>
+                <p>Built independence by <strong>going home less</strong>😂😂😂</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="milestone-card">
+                <div class="milestone-icon">💪</div>
+                <p><strong>Showed up</strong> even on days you didn't feel like it that's real strength!</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="milestone-card">
+                <div class="milestone-icon">🎓</div>
+                <p><strong>Aced first year</strong> the second time around what an incredible comeback!🌟</p>
+            </div>
+        </div>
+		<div class="card">
+			<div class="milestone-card">
+			<div class="milestone-icon">💖</div>
+			<p>Became someone's safe space</p>
+		</div>
+		</div>
+		<div class="card">
+			<div class="milestone-card">
+			<div class="milestone-icon">🌱</div>
+			<p>Mastered the art of <strong>self-care</strong> without guilt</p>
+		</div>
+		</div>
+    </div>
+</div>
+
+    <div class="tab-content" id="tab3">
+        <div class="section-container">
+            <h2 class="section-header">Videos That I feel will Speak to You</h2>
+            <div class="masonry">
+                <div class="card video-card" data-type="video" data-src="One.mp4">
+                    <div style="aspect-ratio: 3/4; background: linear-gradient(to bottom right, #FFE5E5, #FFF0E5); position: relative;">
+                        <video src="One.mp4" muted preload="metadata" style="width: 100%; height: 100%; object-fit: cover;"></video>
+                        <div class="video-overlay">
+                            <div class="play-button">
+                                <div class="play-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-title" style="text-align: center;">Growth</p>
+                    </div>
+                </div>
+                <div class="card video-card" data-type="video" data-src="Two.mp4">
+                    <div style="aspect-ratio: 3/4; background: linear-gradient(to bottom right, #FFB4C8, #FFF0E5); position: relative;">
+                        <video src="Two.mp4" muted preload="metadata" style="width: 100%; height: 100%; object-fit: cover;"></video>
+                        <div class="video-overlay">
+                            <div class="play-button">
+                                <div class="play-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-title" style="text-align: center;">Resilience</p>
+                    </div>
+                </div>
+                <div class="card video-card" data-type="video" data-src="Three.mp4">
+                    <div style="aspect-ratio: 3/4; background: linear-gradient(to bottom right, #E5D4FF, #FFF0E5); position: relative;">
+                        <video src="Three.mp4" muted preload="metadata" style="width: 100%; height: 100%; object-fit: cover;"></video>
+                        <div class="video-overlay">
+                            <div class="play-button">
+                                <div class="play-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-title" style="text-align: center;">Self Love</p>
+                    </div>
+                </div>
+				<div class="card video-card" data-type="video" data-src="four.mp4">
+                    <div style="aspect-ratio: 3/4; background: linear-gradient(to bottom right, #FFE5E5, #C8B6E2); position: relative;">
+                        <video src="four.mp4" muted preload="metadata" style="width: 100%; height: 100%; object-fit: cover;"></video>
+                        <div class="video-overlay">
+                            <div class="play-button">
+                                <div class="play-icon"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-title" style="text-align: center;">Discipline</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-container">
+    <h2 class="section-header">Quotes that might resonate with you...</h2>
+    <div class="masonry">
+        <div class="card quote-card">
+            <p class="quote-text">"In a world of data, the most valuable code is written with wisdom and the most impactful models are built with purpose."</p>
+            <p class="quote-author">— A Modern Thinker</p>
+        </div>
+        <div class="card quote-card">
+            <p class="quote-text">"Every adversity carries with it the seed of an equivalent or greater benefit."</p>
+            <p class="quote-author">— Napoleon Hill</p>
+        </div>
+        <div class="card quote-card">
+            <p class="quote-text">"The clarity of your vision will determine the power of your focus. Guard it above all else."</p>
+            <p class="quote-author">— Robin Sharma</p>
+        </div>
+        <div class="card quote-card">
+            <p class="quote-text">"What you are afraid of is never as frightening as what you imagine. The fear you let build up in your mind is worse than the situation that actually exists."</p>
+            <p class="quote-author">— Spencer Johnson</p>
+        </div>
+    </div>
+	</div>
+
+        <div class="section-container">
+            <h2 class="section-header">Verses for Your Journey</h2>
+            <div class="masonry">
+        <div class="card verse-card">
+            <p class="verse-text">The Lord will guide you always, he will satisfy your needs in a sun scorched land and will strengthen your frame. You will be like a well watered garden, like a spring whose waters never fail.</p>
+            <p class="verse-reference">— Isaiah 58:11</p>
+        </div>
+		<div class="card verse-card">
+            <p class="verse-text">No one will be able to stand against you all the days of your life. As I was with Moses, so I will be with you, I will never leave you nor forsake you.</p>
+            <p class="verse-reference">— Joshua 1:5</p>
+        </div>
+        <div class="card verse-card">
+            <p class="verse-text">The Lord will fight for you, you need only to be still.</p>
+            <p class="verse-reference">— Exodus 14:14</p>
+        </div>
+        <div class="card verse-card">
+            <p class="verse-text">But those who hope in the Lord will renew their strength. They will soar on wings like eagles, they will run and not grow weary, they will walk and not be faint.</p>
+            <p class="verse-reference">— Isaiah 40:31</p>
+        </div>
+		</div>
+    </div>
+    </div>
+
+    <div class="tab-content" id="tab4">
+        <h2 class="section-header">Our Favorite Moments</h2>
+        <div class="masonry">
+            <div class="card" data-type="image" data-src="ppg.jpg">
+                <img src="ppg.jpg" alt="Late night conversations">
+                <div class="card-content">
+                    <p class="card-title">PPG😂</p>
+                    <p class="card-description">To those talks that felt like therapy</p>
+                </div>
+            </div>
+            <div class="card" data-type="video" data-src="six.mp4">
+                <video src="six.mp4" muted preload="metadata"></video>
+                <div class="card-content">
+                    <p class="card-title">😅Random moments</p>
+                    <p class="card-description">Trust me by the end of this degree I'll be a whole dancer😂🤝</p>
+                </div>
+            </div>
+            <div class="card" data-type="image" data-src="onepic.jpg">
+                <img src="onepic.jpg" alt="Support through tough times">
+                <div class="card-content">
+                    <p class="card-title">Panji's Room</p>
+                    <p class="card-description">😂The room where we saved the semester</p>
+                </div>
+            </div>
+            <div class="card" data-type="video" data-src="seven.mp4">
+                <video src="seven.mp4" muted preload="metadata"></video>
+                <div class="card-content">
+                    <p class="card-title">Celebrating wins together</p>
+                    <p class="card-description">Your success feels like my success</p>
+                </div>
+            </div>
+			<div class="card" data-type="video" data-src="ten.mp4">
+                <video src="ten.mp4" muted preload="metadata"></video>
+                <div class="card-content">
+                    <p class="card-title">Acapella</p>
+                    <p class="card-description">This was an amazing peformance!!!</p>
+                </div>
+                </div>
+			<div class="card" data-type="image" data-src="twopic.png">
+                <img src="twopic.png" alt="Random adventures">
+                <div class="card-content">
+                    <p class="card-title">Modules that almost had us😭💔</p>
+                    <p class="card-description">We just showed up everyday and gave it our best</p>
+                </div>
+            </div>            
+			<div class="card" data-type="video" data-src="eight.mp4">
+                <video src="eight.mp4" muted preload="metadata"></video>
+                <div class="card-content">
+                    <p class="card-title">Trying out new things!!!</p>
+                    <p class="card-description">😂I'll try to be less scared in a few months</p>
+                </div>
+            </div>
+			<div class="card" data-type="video" data-src="nine.mp4">
+                <video src="nine.mp4" muted preload="metadata"></video>
+                <div class="card-content">
+                    <p class="card-title">COS 122</p>
+                    <p class="card-description">Not sure what we learnt there but we passed the module🥹</p>
+                </div>
+            </div>
+            <div class="card" data-type="image" data-src="two.jpg">
+                <img src="two.jpg" alt="Road trip adventures">
+                <div class="card-content">
+                    <p class="card-title">STC and STK lectures</p>
+                    <p class="card-description"> I really enjoyed every moment of these lectures 😅including the content being taught</p>
+                </div>
+            </div>
+			<div class="card" data-type="image" data-src="threepic.png">
+                <img src="threepic.png" alt="Comfortable silence">
+                <div class="card-content">
+                    <p class="card-title">Zoom Calls</p>
+                    <p class="card-description">I really enjoyed these calls!!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="tab5">
+        <div class="thankyou-card">
+            <div class="star">⭐</div>
+            <h2>Thank You</h2>
+            <p style="font-size: 1.5rem; margin-bottom: 1.5rem;">For being my friend this year</p>
+            <p>For every laugh, every tear, every moment of silence, and every burst of joy. For showing up when it mattered and for being unapologetically you.</p>
+            <p>You make this world brighter just by being in it.</p>
+            <p style="font-size: 1.5rem; margin-top: 1.5rem;">Here's to many more adventures together 💛</p>
+        </div>
+    </div>
+</main>
+
+<div class="viewer" id="viewer">
+    <span class="viewer-close" id="viewerClose">&times;</span>
+    <div class="viewer-left" id="viewerLeft"></div>
+    <div class="viewer-right" id="viewerRight"></div>
+    <div class="viewer-content" id="viewerContent"></div>
+</div>
+
+<script>
+var tabs = document.querySelectorAll('.tab');
+var tabContents = document.querySelectorAll('.tab-content');
+
+tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+        var targetTab = tab.dataset.tab;
+        
+        tabs.forEach(function(t) {
+            t.classList.remove('active');
+        });
+        tabContents.forEach(function(tc) {
+            tc.classList.remove('active');
+		});
+        
+        tab.classList.add('active');
+        document.getElementById(targetTab).classList.add('active');
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+
+document.querySelectorAll('.card video').forEach(function(video) {
+    var playTimeout;
+    
+    video.parentElement.addEventListener('mouseenter', function() {
+        clearTimeout(playTimeout);
+        playTimeout = setTimeout(function() {
+            video.play();
+        }, 50);
+    });
+    
+    video.parentElement.addEventListener('mouseleave', function() {
+        clearTimeout(playTimeout);
+        video.pause();
+        video.currentTime = 0;
+    });
+});
+
+var cards = Array.from(document.querySelectorAll('.card[data-type]'));
+var viewerIndex = 0;
+
+var viewer = document.getElementById('viewer');
+var viewerContent = document.getElementById('viewerContent');
+
+function openViewer(index) {
+    viewerIndex = index;
+    var card = cards[index];
+    var type = card.dataset.type;
+    var src = card.dataset.src;
+    
+    viewer.classList.add('active');
+    
+    if (type === 'image') {
+        viewerContent.innerHTML = '<img src="' + src + '">';
+    } else {
+        viewerContent.innerHTML = '<video src="' + src + '" controls autoplay></video>';
+    }
+}
+
+cards.forEach(function(card, i) {
+    card.addEventListener('click', function() {
+        openViewer(i);
+    });
+});
+
+document.getElementById('viewerClose').onclick = function() {
+    viewer.classList.remove('active');
+    viewerContent.innerHTML = '';
+};
+
+viewer.onclick = function(e) {
+    if (e.target === viewer) {
+        viewer.classList.remove('active');
+        viewerContent.innerHTML = '';
+    }
+};
+
+function next() {
+    viewerIndex = (viewerIndex + 1) % cards.length;
+    openViewer(viewerIndex);
+}
+
+function prev() {
+    viewerIndex = (viewerIndex - 1 + cards.length) % cards.length;
+    openViewer(viewerIndex);
+}
+
+document.getElementById('viewerLeft').onclick = function(e) {
+    e.stopPropagation();
+    prev();
+};
+
+document.getElementById('viewerRight').onclick = function(e) {
+    e.stopPropagation();
+    next();
+};
+
+var startX = 0;
+
+viewer.addEventListener('touchstart', function(e) {
+    startX = e.touches[0].clientX;
+});
+
+viewer.addEventListener('touchend', function(e) {
+    var endX = e.changedTouches[0].clientX;
+    if (endX - startX > 50) prev();
+    if (startX - endX > 50) next();
+});
+</script>
+
+</body>
+</html>
